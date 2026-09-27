@@ -43,9 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppMenu.cs" />
     <Compile Include="Autenticador.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConsoleNotifier.cs" />
+    <Compile Include="ConsoleUtils.cs" />
     <Compile Include="IAutenticacion.cs" />
     <Compile Include="InMemoryUserRepository.cs" />
     <Compile Include="INotification.cs" />

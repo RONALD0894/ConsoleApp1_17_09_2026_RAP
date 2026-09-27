@@ -12,7 +12,7 @@ public class UserRegistrar
 
     public void Registrar(IEnumerable<Usuario> usuarios)
     {
-        if (usuarios == null) return;
+        if (usuarios == null) throw new System.ArgumentNullException(nameof(usuarios));
         foreach (var u in usuarios)
         {
             _repo.Add(u);

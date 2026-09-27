@@ -6,6 +6,7 @@ public static class PasswordHasher
     // Formato: {iterations}.{saltBase64}.{hashBase64}
     public static string HashPassword(string password, int iterations = 10000)
     {
+        if (string.IsNullOrEmpty(password)) throw new System.ArgumentException("Password cannot be null or empty.");
         using (var rng = new RNGCryptoServiceProvider())
         {
             byte[] salt = new byte[16];
@@ -21,12 +22,14 @@ public static class PasswordHasher
 
     public static bool Verify(string hashedPassword, string password)
     {
-        if (string.IsNullOrEmpty(hashedPassword)) return false;
+        if (hashedPassword == null) throw new System.ArgumentNullException(nameof(hashedPassword));
+        if (password == null) throw new System.ArgumentNullException(nameof(password));
+        if (string.IsNullOrWhiteSpace(hashedPassword)) throw new System.FormatException("Hashed password is empty or whitespace.");
 
         var parts = hashedPassword.Split('.');
-        if (parts.Length != 3) return false;
+        if (parts.Length != 3) throw new System.FormatException("Hashed password has invalid format.");
 
-        if (!int.TryParse(parts[0], out int iterations)) return false;
+        if (!int.TryParse(parts[0], out int iterations)) throw new System.FormatException("Invalid iteration count in hashed password.");
 
         byte[] salt = Convert.FromBase64String(parts[1]);
         byte[] hash = Convert.FromBase64String(parts[2]);
