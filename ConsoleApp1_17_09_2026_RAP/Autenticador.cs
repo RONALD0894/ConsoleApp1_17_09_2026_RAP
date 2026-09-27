@@ -1,56 +1,42 @@
 using System;
 using System.Collections.Generic;
 
+// Autenticador responsable únicamente de la lógica de autenticación (Single Responsibility - SRP)
+// Depende de abstracciones (IReadOnlyUserRepository, INotification) para cumplir Dependency Inversion (DIP)
 public class Autenticador : IAutenticacion
 {
-    private Dictionary<string, Usuario> usuarios = new Dictionary<string, Usuario>();
+    private readonly IReadOnlyUserRepository _repo;
+    private readonly INotification _notifier;
 
-    public Autenticador()
+    public Autenticador(IReadOnlyUserRepository repo, INotification notifier)
     {
-    }
-
-    public Autenticador(IUserRepository repo)
-    {
-        if (repo != null)
-        {
-            foreach (var u in repo.GetAll())
-            {
-                usuarios[u.Nombre] = u;
-            }
-        }
-    }
-
-    public void RegistrarUsuario(Usuario usuario)
-    {
-        usuarios[usuario.Nombre] = usuario;
+        _repo = repo ?? throw new ArgumentNullException(nameof(repo));
+        _notifier = notifier ?? throw new ArgumentNullException(nameof(notifier));
     }
 
     public bool ValidarAcceso(string nombre, string password, Rol rol)
     {
-        if (usuarios.ContainsKey(nombre))
+        var u = _repo.FindByName(nombre);
+        if (u == null)
         {
-            Usuario u = usuarios[nombre];
+            _notifier.Notify("[X] Usuario no encontrado.");
+            return false;
+        }
 
-            if (PasswordHasher.Verify(u.Password, password))
-            {
-                // Verificar rol
-                if (u.TienePermiso(rol))
-                {
-                    MostrarAcceso(nombre, rol);
-                    return true;
-                }
-                Console.WriteLine("[X] El usuario no tiene el rol requerido.");
-            }
-            else
-            {
-                Console.WriteLine("[X] Contraseña incorrecta.");
-            }
-        }
-        else
+        if (!PasswordHasher.Verify(u.Password, password))
         {
-            Console.WriteLine("[X] Usuario no encontrado.");
+            _notifier.Notify("[X] Contraseña incorrecta.");
+            return false;
         }
-        return false;
+
+        if (!u.TienePermiso(rol))
+        {
+            _notifier.Notify("[X] El usuario no tiene el rol requerido.");
+            return false;
+        }
+
+        MostrarAcceso(u.Nombre, rol);
+        return true;
     }
 
     private void MostrarAcceso(string nombre, Rol rol)
@@ -58,23 +44,24 @@ public class Autenticador : IAutenticacion
         switch (rol)
         {
             case Rol.Admin:
-                Console.WriteLine($"{nombre} tiene acceso completo.");
+                _notifier.Notify($"{nombre} tiene acceso completo.");
                 break;
             case Rol.Usuario:
-                Console.WriteLine($"{nombre} puede consultar y modificar datos.");
+                _notifier.Notify($"{nombre} puede consultar y modificar datos.");
                 break;
             case Rol.Invitado:
-                Console.WriteLine($"{nombre} solo puede leer información.");
+                _notifier.Notify($"{nombre} solo puede leer información.");
                 break;
         }
     }
 
+    // Método de utilidad para listar usuarios (usa la abstracción de notificador)
     public void ListarUsuarios()
     {
-        Console.WriteLine("=== Usuarios registrados ===");
-        foreach (var kvp in usuarios)
+        _notifier.Notify("=== Usuarios registrados ===");
+        foreach (var u in _repo.GetAll())
         {
-            Console.WriteLine($"Usuario: {kvp.Key}");
+            _notifier.Notify($"Usuario: {u.Nombre}");
         }
     }
 }

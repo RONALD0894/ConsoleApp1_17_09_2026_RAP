@@ -43,9 +43,46 @@ namespace ConsoleApp1_17_09_2026_RAP
 
         int intentos = 0;
         int maxIntentos = Config.MAX_INTENTOS;
-        // Crear repositorio en memoria con datos de prueba
-        var repo = new InMemoryUserRepository(SeedUsuarios.ObtenerUsuarios());
-        Autenticador auth = new Autenticador(repo);
+        // Crear repositorio en memoria vacío y usar UserRegistrar para añadir usuarios (ISP, SRP)
+        var repo = new InMemoryUserRepository();
+        var registrar = new UserRegistrar(repo);
+        registrar.Registrar(SeedUsuarios.ObtenerUsuarios());
+
+        // Crear notificador y autenticador que dependen de abstracciones (DIP)
+        INotification notifier = new ConsoleNotifier();
+        Autenticador auth = new Autenticador(repo, notifier);
+
+        // Mostrar ejemplos LINQ antes de pedir credenciales
+        notifier.Notify("=== Demo consultas LINQ ===");
+
+        notifier.Notify("LINQ usado: Query(), Where(), OrderBy(), ToList()");
+        var admins = UserQueryExamples.GetByRole(repo, Rol.Admin);
+        notifier.Notify("Admins:");
+        foreach (var u in admins)
+        {
+            notifier.Notify($" - {u.Nombre}");
+        }
+
+        notifier.Notify("LINQ usado: Query(), Where(...) (IndexOf case-insensitive), OrderBy(), ToList()");
+        var search = UserQueryExamples.SearchByName(repo, "an");
+        notifier.Notify("\nSearch by name fragment 'an':");
+        foreach (var u in search)
+        {
+            notifier.Notify($" - {u.Nombre}");
+        }
+
+        notifier.Notify("LINQ usado: Query(), OrderBy(), Skip(), Take(), ToList()");
+        var page1 = UserQueryExamples.GetPaged(repo, 1, 5);
+        notifier.Notify("\nPaged (page 1, size 5):");
+        foreach (var u in page1)
+        {
+            notifier.Notify($" - {u.Nombre}");
+        }
+
+        notifier.Notify("LINQ usado: Query(), Count(predicate)");
+        int countUsuarios = UserQueryExamples.CountByRole(repo, Rol.Usuario);
+        notifier.Notify($"\nCount usuarios with role Usuario: {countUsuarios}");
+
 
         while (intentos < maxIntentos)
         {

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 
-public interface IUserRepository
+// Interface que extiende la interfaz de solo lectura (Interface Segregation - ISP)
+public interface IUserRepository : IReadOnlyUserRepository
 {
-    IEnumerable<Usuario> GetAll();
-    Usuario FindByName(string nombre);
     void Add(Usuario user);
 }

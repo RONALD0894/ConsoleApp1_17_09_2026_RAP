@@ -45,14 +45,19 @@
   <ItemGroup>
     <Compile Include="Autenticador.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="ConsoleNotifier.cs" />
     <Compile Include="IAutenticacion.cs" />
     <Compile Include="InMemoryUserRepository.cs" />
+    <Compile Include="INotification.cs" />
+    <Compile Include="IReadOnlyUserRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="PasswordHasher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="SeedUsuarios.cs" />
+    <Compile Include="UserQueryExamples.cs" />
+    <Compile Include="UserRegistrar.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuarioBase.cs" />
   </ItemGroup>
