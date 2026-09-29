@@ -7,7 +7,7 @@ Llama a los métodos principales y coordina la ejecución.
 Aquí se inicializan repositorios, autenticadores y menús.
 --Imagen--
 
-![Flujo de Program](ConsoleApp1_17_09_2026_RAP\Imagen)
+![Flujo de Program](Imagen/Clase_Program.cs)
 
 2. AppMenu.cs
 Maneja la lógica del menú en consola.
