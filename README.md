@@ -7,7 +7,7 @@ Llama a los métodos principales y coordina la ejecución.
 Aquí se inicializan repositorios, autenticadores y menús.
 --Imagen--
 
-![Flujo de Program](Imagen/Clase Program.cs)
+![Flujo de Program](Imagen/Clase_Program.cs)
 
 2. AppMenu.cs
 Maneja la lógica del menú en consola.
@@ -103,6 +103,11 @@ Notificación → ConsoleNotifier.cs informa resultados en consola.
 Consultas → UserQueryExamples.cs permite probar búsquedas de usuarios
 --Diagrama de Flujo--
 
-![Diagrama de Flujo](Imagen/Diagrama de flujo)
+![Diagrama de Flujo](Imagen/Diagrama_de_flujo)
 
+--Ejecucion de Program--
+![Diagrama de Flujo](Imagen/Resultados_LINQ)
+
+--Ejecucion de Autenticacion--
+![Diagrama de Flujo](Imagen/Ejecucion_de_Acceso)
 
