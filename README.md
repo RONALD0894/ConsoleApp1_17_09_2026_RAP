@@ -5,7 +5,7 @@ Punto de entrada de la aplicación.
 Llama a los métodos principales y coordina la ejecución.
 
 Aquí se inicializan repositorios, autenticadores y menús.
---Imagen--
+--Imagen--1
 
 ![Flujo de Program](Imagen/Clase_Program.cs)
 
