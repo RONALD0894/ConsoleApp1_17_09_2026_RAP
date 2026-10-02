@@ -5,9 +5,9 @@ Punto de entrada de la aplicación.
 Llama a los métodos principales y coordina la ejecución.
 
 Aquí se inicializan repositorios, autenticadores y menús.
---Imagen--
+--Imagen--1
 
-![Flujo de Program](./ConsoleApp1_17_09_2026_RAP/ConsoleApp1_17_09_2026_RAP/Imagen/Imagen1.png)
+![Flujo de Program](Imagen/Imagen1)
 
 2. AppMenu.cs
 Maneja la lógica del menú en consola.
@@ -103,11 +103,11 @@ Notificación → ConsoleNotifier.cs informa resultados en consola.
 Consultas → UserQueryExamples.cs permite probar búsquedas de usuarios
 --Diagrama de Flujo--
 
-![Diagrama de Flujo](./ConsoleApp1_17_09_2026_RAP/ConsoleApp1_17_09_2026_RAP/Imagen/Imagen2.png)
+![Diagrama de Flujo](Imagen/Imagen2)
 
 --Ejecucion de Program--
-![Diagrama de Flujo](./ConsoleApp1_17_09_2026_RAP/ConsoleApp1_17_09_2026_RAP/Imagen/Imagen3.png)
+![Diagrama de Flujo](Imagen/Imagen3)
 
 --Ejecucion de Autenticacion--
-![Diagrama de Flujo](./ConsoleApp1_17_09_2026_RAP/ConsoleApp1_17_09_2026_RAP/Imagen/Imagen4.png)
+![Diagrama de Flujo](Imagen/Imagen4)
 
