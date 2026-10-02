@@ -104,11 +104,11 @@ Notificación → ConsoleNotifier.cs informa resultados en consola.
 Consultas → UserQueryExamples.cs permite probar búsquedas de usuarios
 --Diagrama de Flujo--
 
-![Diagrama de Flujo](Imagen/Imagen2)
+![Diagrama de Flujo](Imagen/Imagen2.png)
 
 --Ejecucion de Program--
-![Diagrama de Flujo](Imagen/Imagen3)
+![Diagrama de Flujo](Imagen/Imagen3.png)
 
 --Ejecucion de Autenticacion--
-![Diagrama de Flujo](Imagen/Imagen4)
+![Diagrama de Flujo](Imagen/Imagen4.png)
 
