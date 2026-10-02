@@ -7,7 +7,7 @@ Llama a los métodos principales y coordina la ejecución.
 Aquí se inicializan repositorios, autenticadores y menús.
 --Imagen--1
 
-![Flujo de Program](Imagen/Imagen1.png)
+![Flujo de Program](ConsoleApp1_17_09_2026_RAP/Imagen/Imagen1.png)
 
 
 2. AppMenu.cs
